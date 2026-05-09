@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emine Can Studio — Premium Beauty Studio İzmir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5EFE6;
+    --cream-dark: #EDE3D5;
+    --gold: #A8873A;
+    --gold-light: #C9A96E;
+    --gold-pale: #F0E6CC;
+    --warm-white: #FAF7F2;
+    --charcoal: #2C2318;
+    --muted: #8B7355;
+    --nude: #D4B896;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* CURSOR */
+  body { cursor: none; }
+  #cursor {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+  }
+  #cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease-out, width 0.3s, height 0.3s, opacity 0.3s;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 60px;
+    transition: background 0.4s, padding 0.4s, backdrop-filter 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(245, 239, 230, 0.92);
+    backdrop-filter: blur(20px);
+    padding: 18px 60px;
+    border-bottom: 0.5px solid rgba(168, 135, 58, 0.2);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 42px; list-style: none; }
+  .nav-links a {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+  .nav-cta {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border: 0.5px solid var(--gold);
+    padding: 10px 24px;
+    transition: background 0.3s, color 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--warm-white); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 140px 80px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 10px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s 0.2s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 72px;
+    line-height: 1.05;
+    color: var(--charcoal);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 1s 0.4s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-script {
+    font-family: 'Great Vibes', cursive;
+    font-size: 80px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+  }
+  .hero-desc {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--muted);
+    max-width: 380px;
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+    letter-spacing: 0.5px;
+  }
+  .hero-btns {
+    display: flex; gap: 20px; align-items: center;
+    opacity: 0;
+    animation: fadeUp 1s 1s forwards;
+  }
+  .btn-primary {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--warm-white);
+    text-decoration: none;
+    padding: 16px 40px;
+    display: inline-block;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .btn-primary:hover { background: var(--charcoal); transform: translateY(-2px); }
+  .btn-secondary {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 12px;
+    transition: color 0.3s, gap 0.3s;
+  }
+  .btn-secondary:hover { color: var(--gold); gap: 20px; }
+  .btn-secondary::after { content: '—'; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 1.5s 0.3s forwards;
+  }
+  .hero-img-bg {
+    position: absolute; inset: 0;
+    background: var(--cream-dark);
+  }
+  .hero-pattern {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 30% 40%, rgba(168,135,58,0.08) 0%, transparent 60%),
+                      radial-gradient(circle at 80% 80%, rgba(168,135,58,0.06) 0%, transparent 50%);
+  }
+  .hero-ornament {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Great Vibes', cursive;
+    font-size: 300px;
+    color: rgba(168,135,58,0.06);
+    white-space: nowrap;
+    user-select: none;
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 60px; right: 60px;
+    width: 120px; height: 120px;
+    border: 0.5px solid rgba(168,135,58,0.4);
+    border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px;
+    animation: rotate 20s linear infinite;
+  }
+  .hero-badge-inner {
+    text-align: center;
+  }
+  .hero-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .hero-badge-text {
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .hero-float {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .hero-float-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 22px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+  }
+  .hero-float-sub {
+    font-family: 'Great Vibes', cursive;
+    font-size: 64px;
+    color: var(--gold-light);
+    display: block;
+    line-height: 1;
+    margin-top: -8px;
+  }
+  .hero-line {
+    position: absolute; top: 50%; left: 0;
+    width: 0.5px; height: 100px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    transform: translateY(-50%);
+  }
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    opacity: 0;
+    animation: fadeUp 1s 1.4s forwards;
+  }
+  .hero-scroll span {
+    font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--muted); font-weight: 300;
+  }
+  .scroll-line {
+    width: 0.5px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    overflow: hidden;
+    background: var(--gold);
+    padding: 14px 0;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+  }
+  .marquee-item {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 15px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--warm-white);
+    padding: 0 40px;
+  }
+  .marquee-dot {
+    display: inline-block;
+    width: 4px; height: 4px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 10px;
+  }
+
+  /* ABOUT */
+  #about {
+    padding: 140px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+    height: 580px;
+  }
+  .about-box-main {
+    position: absolute;
+    top: 0; left: 0;
+    width: 76%; height: 76%;
+    background: var(--cream-dark);
+    overflow: hidden;
+  }
+  .about-box-main-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--cream-dark) 0%, var(--gold-pale) 100%);
+  }
+  .about-box-accent {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 50%; height: 50%;
+    background: var(--gold-pale);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 8px;
+  }
+  .about-box-quote {
+    font-family: 'Great Vibes', cursive;
+    font-size: 28px;
+    color: var(--gold);
+    text-align: center;
+    padding: 20px;
+    line-height: 1.4;
+  }
+  .about-frame {
+    position: absolute;
+    bottom: 10px; left: 10px;
+    width: 76%; height: 76%;
+    border: 0.5px solid rgba(168,135,58,0.25);
+    pointer-events: none;
+  }
+  .about-gold-line {
+    position: absolute; top: 38%; left: 76%;
+    width: 24%;
+    height: 0.5px;
+    background: var(--gold);
+  }
+  .about-circle {
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 80px; height: 80px;
+    border: 0.5px solid rgba(168,135,58,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-circle-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    text-align: center;
+    line-height: 1.4;
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 300;
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 40px; height: 0.5px;
+    background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 1.15;
+    color: var(--charcoal);
+    margin-bottom: 28px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-text {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 2;
+    color: var(--muted);
+    margin-bottom: 20px;
+    letter-spacing: 0.3px;
+  }
+  .pillars {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin-top: 40px;
+  }
+  .pillar {
+    padding: 20px;
+    border: 0.5px solid rgba(168,135,58,0.2);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .pillar:hover { border-color: var(--gold); background: rgba(168,135,58,0.03); }
+  .pillar-icon {
+    font-family: 'Great Vibes', cursive;
+    font-size: 28px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .pillar-title {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .pillar-text {
+    font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.6;
+  }
+
+  /* SERVICES */
+  #services { padding: 120px 80px; background: var(--warm-white); }
+  .services-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .service-card {
+    padding: 60px 50px;
+    border: 0.5px solid rgba(168,135,58,0.15);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+    cursor: default;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.5s;
+  }
+  .service-card:hover::before { width: 100%; }
+  .service-card:hover { background: rgba(168,135,58,0.03); }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: rgba(168,135,58,0.12);
+    position: absolute;
+    top: 24px; right: 30px;
+    line-height: 1;
+  }
+  .service-icon-wrap {
+    width: 48px; height: 48px;
+    border: 0.5px solid rgba(168,135,58,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 28px;
+  }
+  .service-icon {
+    font-family: 'Great Vibes', cursive;
+    font-size: 26px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .service-sub {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .service-desc {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .service-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .service-list li {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--charcoal);
+    letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .service-list li::before {
+    content: '';
+    display: block;
+    width: 16px; height: 0.5px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* PHILOSOPHY */
+  #philosophy {
+    padding: 140px 80px;
+    background: var(--charcoal);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  #philosophy::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(ellipse at 20% 50%, rgba(168,135,58,0.12) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 50%, rgba(168,135,58,0.08) 0%, transparent 60%);
+  }
+  .phil-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+  .phil-eyebrow {
+    font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--gold-light); font-weight: 300; margin-bottom: 40px;
+    display: flex; align-items: center; justify-content: center; gap: 20px;
+  }
+  .phil-eyebrow::before, .phil-eyebrow::after {
+    content: ''; display: block;
+    width: 40px; height: 0.5px; background: var(--gold);
+  }
+  .phil-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 54px;
+    line-height: 1.2;
+    color: var(--warm-white);
+    margin-bottom: 24px;
+  }
+  .phil-quote em { font-style: italic; color: var(--gold-light); }
+  .phil-attr {
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--muted); font-weight: 300;
+  }
+  .phil-values {
+    display: flex; justify-content: center; gap: 0;
+    margin-top: 80px;
+    border-top: 0.5px solid rgba(168,135,58,0.2);
+    border-bottom: 0.5px solid rgba(168,135,58,0.2);
+  }
+  .phil-value {
+    flex: 1;
+    padding: 40px 20px;
+    border-right: 0.5px solid rgba(168,135,58,0.2);
+    transition: background 0.3s;
+  }
+  .phil-value:last-child { border-right: none; }
+  .phil-value:hover { background: rgba(168,135,58,0.05); }
+  .phil-value-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 300;
+    color: var(--gold); display: block; margin-bottom: 8px;
+  }
+  .phil-value-label {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); font-weight: 300;
+  }
+
+  /* EDUCATION */
+  #education { padding: 120px 80px; }
+  .edu-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: center;
+  }
+  .edu-badge-wrap {
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .edu-badge {
+    padding: 32px 40px;
+    border: 0.5px solid rgba(168,135,58,0.2);
+    display: flex; gap: 24px; align-items: flex-start;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .edu-badge:hover { border-color: var(--gold); transform: translateX(8px); }
+  .edu-badge-icon {
+    font-family: 'Great Vibes', cursive;
+    font-size: 36px; color: var(--gold); line-height: 1; flex-shrink: 0;
+  }
+  .edu-badge-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400; color: var(--charcoal);
+    margin-bottom: 6px;
+  }
+  .edu-badge-desc {
+    font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.7;
+  }
+
+  /* CONTACT */
+  #contact {
+    padding: 120px 80px;
+    background: var(--cream-dark);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-label {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--muted); font-weight: 400;
+  }
+  .form-input, .form-textarea {
+    background: transparent;
+    border: none; border-bottom: 0.5px solid rgba(168,135,58,0.3);
+    padding: 12px 0;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300; font-size: 14px;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.3s;
+    width: 100%;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+  .form-textarea { resize: none; height: 80px; }
+  .contact-info { display: flex; flex-direction: column; gap: 40px; }
+  .contact-item {
+    display: flex; flex-direction: column; gap: 8px;
+    padding-bottom: 40px;
+    border-bottom: 0.5px solid rgba(168,135,58,0.15);
+  }
+  .contact-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .contact-item-label {
+    font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); font-weight: 300;
+  }
+  .contact-item-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300; color: var(--charcoal);
+  }
+  .contact-item-sub {
+    font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.6;
+  }
+  .social-row {
+    display: flex; gap: 20px; margin-top: 8px;
+  }
+  .social-link {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--charcoal); text-decoration: none; font-weight: 300;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 0.5px solid transparent;
+    transition: color 0.3s, border-color 0.3s;
+    padding-bottom: 2px;
+  }
+  .social-link:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    padding: 50px 80px;
+    background: var(--charcoal);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Great Vibes', cursive;
+    font-size: 36px; color: var(--gold);
+  }
+  .footer-copy {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); font-weight: 300;
+  }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 14px; color: rgba(255,255,255,0.4);
+    font-weight: 300;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; transform: scaleY(1); }
+    50% { opacity: 0.4; transform: scaleY(0.6); }
+  }
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 24px 30px; }
+    nav.scrolled { padding: 16px 30px; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 120px 30px 60px; }
+    .hero-title { font-size: 48px; }
+    .hero-script { font-size: 56px; }
+    .hero-right { height: 300px; }
+    #about, #services, #contact { grid-template-columns: 1fr; }
+    #about { padding: 80px 30px; gap: 60px; }
+    .about-visual { height: 340px; }
+    #services { padding: 80px 30px; }
+    .services-grid { grid-template-columns: 1fr; }
+    #philosophy { padding: 80px 30px; }
+    .phil-quote { font-size: 36px; }
+    .phil-values { flex-direction: column; }
+    .phil-value { border-right: none; border-bottom: 0.5px solid rgba(168,135,58,0.2); }
+    #education { padding: 80px 30px; }
+    .edu-grid { grid-template-columns: 1fr; gap: 40px; }
+    #contact { padding: 80px 30px; gap: 60px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 30px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Emine Can</a>
+  <ul class="nav-links">
+    <li><a href="#about">Studio</a></li>
+    <li><a href="#services">Hizmetler</a></li>
+    <li><a href="#education">Eğitim</a></li>
+    <li><a href="#contact">İletişim</a></li>
+  </ul>
+  <a href="http://wa.me/905545747620" target="_blank" class="nav-cta">Randevu Al</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <span class="hero-eyebrow">İzmir · Premium Beauty Studio</span>
+    <h1 class="hero-title">Doğallığı<br>koruyan <em>güzellik</em></h1>
+    <div class="hero-script">Emine Can</div>
+    <p class="hero-desc">Abartılı değil, etkileyici. Yüz hatlarınızı, stilinizi ve doğal güzelliğinizi en estetik şekilde ortaya çıkaran premium bir deneyim.</p>
+    <div class="hero-btns">
+      <a href="http://wa.me/905545747620" target="_blank" class="btn-primary">Randevu Al</a>
+      <a href="#services" class="btn-secondary">Hizmetleri Keşfet</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-ornament">EC</div>
+    <div class="hero-float">
+      <span class="hero-float-logo">Emine Can</span>
+      <span class="hero-float-sub">Studio</span>
+    </div>
+    <div class="hero-line"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-inner">
+        <div class="hero-badge-num">PMU</div>
+        <div class="hero-badge-text">Uzmanı</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Kalıcı Makyaj</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Nail Art</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Cilt Bakımı</span><span class="marquee-dot"></span>
+    <span class="marquee-item">PMU Eğitimi</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Premium Deneyim</span><span class="marquee-dot"></span>
+    <span class="marquee-item">PhiBrows</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Microblading</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Soft Luxury</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Kalıcı Makyaj</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Nail Art</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Cilt Bakımı</span><span class="marquee-dot"></span>
+    <span class="marquee-item">PMU Eğitimi</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Premium Deneyim</span><span class="marquee-dot"></span>
+    <span class="marquee-item">PhiBrows</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Microblading</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Soft Luxury</span><span class="marquee-dot"></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-box-main">
+      <div class="about-box-main-inner">
+        <div style="text-align:center;">
+          <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:14px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Emine Can</div>
+          <div style="font-family:'Great Vibes',cursive;font-size:72px;color:var(--gold);line-height:1;">Studio</div>
+          <div style="width:40px;height:0.5px;background:var(--gold);margin:16px auto;"></div>
+          <div style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);font-weight:300;">İzmir · Türkiye</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-box-accent">
+      <div class="about-box-quote">"Güzelliğinizi<br>keşfedelim"</div>
+    </div>
+    <div class="about-frame"></div>
+    <div class="about-gold-line"></div>
+    <div class="about-circle">
+      <div class="about-circle-text">PMU<br>Uzmanı</div>
+    </div>
+  </div>
+  <div class="about-content">
+    <div class="section-label reveal">Studio Hakkında</div>
+    <h2 class="section-title reveal reveal-delay-1">İzmir'in <em>premium</em><br>beauty studio'su</h2>
+    <p class="section-text reveal reveal-delay-2">Emine Can Studio, modern güzellik anlayışını profesyonel uygulamalarla buluşturan premium bir beauty studio'dur. Her işlemde kişinin yüz hatlarını, stilini ve doğal güzelliğini en estetik şekilde ortaya çıkarmayı hedefliyoruz.</p>
+    <p class="section-text reveal reveal-delay-3">Yıllar içinde geliştirilen uzmanlık ve sektöre duyulan derin bir tutku ile her müşteriye özel, kişiselleştirilmiş bir deneyim sunuyoruz.</p>
+    <div class="pillars reveal reveal-delay-4">
+      <div class="pillar">
+        <div class="pillar-icon">✦</div>
+        <div class="pillar-title">Doğal Görünüm</div>
+        <div class="pillar-text">Yüzü sertleştirmeyen, doğallığı koruyan uygulamalar</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">✦</div>
+        <div class="pillar-title">Temiz İşçilik</div>
+        <div class="pillar-text">Her detayda mükemmeliyetçi yaklaşım ve hassas uygulama</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">✦</div>
+        <div class="pillar-title">Premium Deneyim</div>
+        <div class="pillar-text">Baştan sona özenle tasarlanmış studio deneyimi</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">✦</div>
+        <div class="pillar-title">Kişiye Özel</div>
+        <div class="pillar-text">Her yüz yapısına uygun, özelleştirilmiş çözümler</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div class="section-label reveal" style="justify-content:center;">Hizmetlerimiz</div>
+    <h2 class="section-title reveal" style="font-size:52px;">Güzelliğin <em>her boyutu</em></h2>
+  </div>
+  <div class="services-grid">
+    <!-- PMU -->
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon-wrap"><div class="service-icon">✦</div></div>
+      <div class="service-title">Kalıcı Makyaj</div>
+      <div class="service-sub">PMU · PhiBrows Uzmanı</div>
+      <p class="service-desc">Günlük makyaj ihtiyacını azaltan, zamansız ve bakımlı görünüm sağlayan profesyonel kalıcı makyaj uygulamaları.</p>
+      <ul class="service-list">
+        <li>Dudak Renklendirme</li>
+        <li>Kalıcı Eyeliner & Dipliner</li>
+        <li>Pudralama Kaş</li>
+        <li>Microblading</li>
+        <li>PhiBrows Teknikleri</li>
+        <li>Kaş Uygulamaları</li>
+      </ul>
+    </div>
+    <!-- NAIL -->
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">02</div>
+      <div class="service-icon-wrap"><div class="service-icon">♡</div></div>
+      <div class="service-title">Nail Art & Protez Tırnak</div>
+      <div class="service-sub">Clean Girl · Soft Luxury</div>
+      <p class="service-desc">Modern nail aesthetics anlayışıyla tasarlanan, clean girl estetikten editorial tarz tasarımlara uzanan kapsamlı tırnak hizmetleri.</p>
+      <ul class="service-list">
+        <li>Protez Tırnak & Jel</li>
+        <li>Ombre & French</li>
+        <li>Kedi Gözü · Disco Oje</li>
+        <li>Özel Nail Art Tasarımı</li>
+        <li>Taş & Charm Detayları</li>
+        <li>Tırnak Tamiri</li>
+      </ul>
+    </div>
+    <!-- SKIN -->
+    <div class="service-card reveal reveal-delay-4">
+      <div class="service-num">03</div>
+      <div class="service-icon-wrap"><div class="service-icon">◇</div></div>
+      <div class="service-title">Cilt Bakımı & Güzellik</div>
+      <div class="service-sub">Sağlıklı Cilt · Doğal Işıltı</div>
+      <p class="service-desc">Sağlıklı, ışıltılı ve bakımlı bir cilt için kişiye özel tasarlanmış profesyonel bakım protokolleri.</p>
+      <ul class="service-list">
+        <li>Profesyonel Cilt Bakımı</li>
+        <li>Cilt Yenileme Tedavileri</li>
+        <li>Nem & Işıltı Bakımları</li>
+        <li>Kişiye Özel Bakım Planı</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="phil-content">
+    <div class="phil-eyebrow reveal">Marka Felsefesi</div>
+    <blockquote class="phil-quote reveal">"Abartılı değil,<br><em>etkileyici.</em>"</blockquote>
+    <p class="phil-attr reveal">— Emine Can Studio</p>
+    <div class="phil-values reveal">
+      <div class="phil-value">
+        <span class="phil-value-num">01</span>
+        <span class="phil-value-label">Doğallık</span>
+      </div>
+      <div class="phil-value">
+        <span class="phil-value-num">02</span>
+        <span class="phil-value-label">Kalite</span>
+      </div>
+      <div class="phil-value">
+        <span class="phil-value-num">03</span>
+        <span class="phil-value-label">Özgüven</span>
+      </div>
+      <div class="phil-value">
+        <span class="phil-value-num">04</span>
+        <span class="phil-value-label">Premium</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="edu-grid">
+    <div>
+      <div class="section-label reveal">Eğitimci Kimliği</div>
+      <h2 class="section-title reveal">Bilgiyi <em>paylaşmak</em><br>bir misyon</h2>
+      <p class="section-text reveal">Emine Can Studio, yalnızca hizmet sunan bir salon değil; uzmanlığını sektörle paylaşan, güvenilir bir eğitim merkezi olma vizyonuyla ilerliyoruz.</p>
+      <p class="section-text reveal">Güzellik sektöründe gerçek fark yaratmak, kaliteli eğitimden geçiyor.</p>
+    </div>
+    <div class="edu-badge-wrap">
+      <div class="edu-badge reveal">
+        <div class="edu-badge-icon">✦</div>
+        <div>
+          <div class="edu-badge-title">PMU Eğitimleri</div>
+          <div class="edu-badge-desc">Kalıcı makyaj uygulamalarında teknik uzmanlık kazandıran kapsamlı eğitim programları.</div>
+        </div>
+      </div>
+      <div class="edu-badge reveal reveal-delay-2">
+        <div class="edu-badge-icon">◇</div>
+        <div>
+          <div class="edu-badge-title">Teknik Uygulama Eğitimleri</div>
+          <div class="edu-badge-desc">Sektörün en güncel tekniklerini doğrudan uzmanından öğrenme fırsatı.</div>
+        </div>
+      </div>
+      <div class="edu-badge reveal reveal-delay-4">
+        <div class="edu-badge-icon">♡</div>
+        <div>
+          <div class="edu-badge-title">Profesyonel Gelişim</div>
+          <div class="edu-badge-desc">Güzellik uzmanlığınızı bir üst seviyeye taşıyacak mentorluk ve pratik rehberlik.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div>
+    <div class="section-label reveal">İletişim</div>
+    <h2 class="section-title reveal">Randevunuzu<br>alalım <em>✦</em></h2>
+    <div class="contact-info reveal reveal-delay-2">
+      <div class="contact-item">
+        <div class="contact-item-label">Konum</div>
+        <div class="contact-item-value">İzmir, Türkiye</div>
+        <div class="contact-item-sub">Adres detayı için DM veya arama yoluyla ulaşabilirsiniz.</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">Sosyal Medya</div>
+        <div class="contact-item-value">@eminecanstudio</div>
+        <div class="social-row">
+          <a href="#" class="social-link">Instagram</a>
+          <a href="#" class="social-link">TikTok</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">Çalışma Saatleri</div>
+        <div class="contact-item-value">Pazartesi — Cumartesi</div>
+        <div class="contact-item-sub">09:00 — 18:00 arası, randevuya göre.</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">WhatsApp ile Randevu</div>
+        <a href="http://wa.me/905545747620" target="_blank" class="btn-primary" style="margin-top:8px;display:inline-block;">WhatsApp'tan Yaz</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Emine Can</div>
+  <div class="footer-tagline">Doğallığı koruyan güzellik · İzmir</div>
+  <div class="footer-copy">© 2025 Emine Can Studio</div>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursor-ring');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a, button, .service-card, .pillar, .edu-badge').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '6px'; cursor.style.height = '6px';
+      cursorRing.style.width = '52px'; cursorRing.style.height = '52px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '10px'; cursor.style.height = '10px';
+      cursorRing.style.width = '36px'; cursorRing.style.height = '36px';
+    });
+  });
+
+  // Navbar
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form
+  function handleForm(e) {
+    e.preventDefault();
+    e.target.style.opacity = '0.4';
+    setTimeout(() => {
+      e.target.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    }, 600);
+  }
+</script>
+</body>
+</html>
